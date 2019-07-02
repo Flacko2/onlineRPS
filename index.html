@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RPS ONLINE</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+            
+    <script src="https://kit.fontawesome.com/77faf95db4.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Major+Mono+Display&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- ROCK + PAPER + SCISSORS ICONS -->
+        <!-- <i class="fas fa-hand-scissors"></i>
+        <i class="fas fa-hand-rock"></i>
+        <i class="fas fa-hand-paper"></i> -->
+    <div class="game-container">
+        <h1 id="main-title">
+            <span class="white-font">Rock </span><span class="gray-white-font">Paper </span><span class="gray-font">Scissors </span>
+        </h1>   
+        <main id="game" class="z-depth-5">
+            <h2 id="game-title-1">
+                <span class="white-font">Rock </span><span class="gray-white-font">Paper </span><span class="gray-font">Scissors </span>
+            </h2>
+            <h2 id="game-title-2">
+                <span class="gray-font">Scissors </span><span class="gray-white-font">Paper </span><span class="white-font">Rock </span>
+            </h2>
+            <section id="left">
+                <div id="player1">
+                    <h3 id="player1-name" class="player-name">Player_1</h3>
+                </div>
+            </section>  
+            <section id="choices">
+                <div id="rock" class="choice z-depth-3 waves-effect">
+                    <i class="fas fa-hand-rock"></i>
+                </div>
+                <div id="paper" class="choice z-depth-3 waves-effect">
+                    <i class="fas fa-hand-paper"></i>
+                </div>
+                <div id="scissors" class="choice z-depth-3 waves-effect">
+                    <i class="fas fa-hand-scissors"></i>
+                </div>
+            </section>  
+            <section id="right">
+                <div id="player2">
+                    <h3 id="player2-name" class="player-name">Player_2</h3>
+                </div>
+            </section>    
+        </main>
+    </div>
+
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
