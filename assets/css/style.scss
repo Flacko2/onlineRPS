@@ -1,12 +1,14 @@
 
 $midnight-shadow: #191659;
 $midnight: #021E73;
+$midnight-transparent: rgba(2, 30, 115, 0.5);
 $midnight-dark: #000d35;
 
 $cherry: #F22816;
 $cherry-dark: #66120a;
 
 $strawberry-light: #b64049;
+$strawberry-light-transparent: rgba(192, 93, 101, 0.733);
 $strawberry: #BF2A37;
 $strawberry-dark: #5f131a;
 
@@ -22,6 +24,15 @@ $mono-dark: #262626;
 $black: #0D0D0D;
 
 
+@keyframes moveDown {
+    0% {
+        transform: scale(1.1) translateY(-1rem);
+    }
+
+    100% {
+        transform: scale(1) translateY(0);
+    }
+}
 
 * {
     margin: 0;
@@ -32,27 +43,105 @@ $black: #0D0D0D;
 
 html,
 body,
-.game-container {
+.game-container,
+.lobby-container,
+.intro-container {
     font-size: 20px;
     height: 100vh;
     width: 100vw;
 }
 
+
+
+      
+
 body {
+    position: relative;
     box-shadow: inset 0rem 0rem 3rem 0rem hsla(0, 0%, 23%, 0.75);
     background-image: linear-gradient(
                                     45deg, 
-                                    $mono-light-transparent 0%, 
-                                    $mono-light-transparent 50%, 
-                                    $mono-mid-transparent 50%, 
-                                    $mono-mid-transparent 100%
+                                    $mono-dark 0%, 
+                                    $mono-mid 50%, 
+                                    $mono-light 50%, 
+                                    $white 100%
                                     );
 
     overflow: hidden;
+
+    #user-menu {
+        display: block;
+        position: absolute;
+        right: 0%;
+        width: 50%;
+        text-align: right;
+
+        a[href="#login"] {
+            background-color: $midnight;
+            &:hover {background-color: $midnight-dark;}
+        }
+
+        a[href="#sign-up"] {
+            background-color: $strawberry;
+            &:hover {background-color: $strawberry-dark;}
+        }
+
+        #sign-out {
+            background-color: $mono-dark;
+            color: $strawberry-light;
+            &:hover {background-color: $strawberry-dark;}
+        }
+
+        #reset-game {
+            background-color: $white;
+            color: $black;
+            &:hover {background-color: $mono-light;}
+        }
+
+        #back-to-lobby {
+            background-color: $black;
+            &:hover {background-color: $mono-dark;}
+        }
+
+        .btn-modal {
+            font-size: 1rem;
+            // width: 30%;
+            position: relative;
+            background-color: $cherry-dark;
+            // line-height: 100%;
+        }
+    }
+
+    #login,
+    #sign-up {
+
+        .modal-title {
+            margin-top: 2rem;
+        }
+
+        .modal-footer {
+            background-color: $mono-light;
+            text-align: center;
+
+            .btn-submit {
+                font-size: 1.5rem;
+                color: $midnight-shadow;
+
+                &:hover {
+                    color: $white;
+                }
+            }
+        }
+    }
 }
 
-.game-container {
-    position: relative;
+.intro-container {
+    flex-wrap: wrap;
+}
+
+.game-container,
+.intro-container,
+.lobby-container {
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -68,6 +157,74 @@ body {
         color: $white;
         opacity: .75;
     }
+
+    .intro-title {
+        // background-color: #5f131a;
+        // margin-top: 10rem;
+        text-align: right;
+        letter-spacing: .2rem;
+        align-self: flex-start;
+        color: $midnight;
+        width: 85%;
+        text-shadow: 0rem 11rem 0rem rgba($white, .85),
+                    0rem 22rem 0rem rgba($mono-mid, .7),
+                    0rem 33rem 0rem rgba($black, .55);
+        // transform: rotate(45deg);
+    }
+
+    #play-btn {
+        position: absolute;
+        bottom: 50%;
+    }
+
+    .btn-floating {
+        margin-top: -15rem;
+        transform: scale(4) rotate(0);
+        background-color: $black;
+        color: $white;
+        transition: all .5s;
+        font-size: .55rem;
+        text-align: center;
+
+        &:hover {
+            transform: scale(4.5) rotate(360deg);
+            color: $black;
+            background-color: $white;
+        }
+
+        &:active {
+            background-color: $mono-dark;
+            color: $mono-light;
+
+        }
+    }
+}
+
+#lobby {
+    position: relative;
+    width: 45vw;
+    height: 90vh;
+    background-color: $mono-light-transparent;
+
+    .tab {
+        background-color: $white;
+
+        a {
+            color: $black;
+        }
+        .active {
+            background-color: $midnight-dark;
+            color: $plum;
+        }
+    }
+
+    #play-offline {
+        text-align: center;
+
+        #offline-btn {
+            margin-top: 5rem;
+        }
+    }
 }
 
 
@@ -78,6 +235,21 @@ body {
     grid-template-columns: 1fr 1fr;
     width: 70vw;
     height: 80vh;
+
+    #center-text {
+        position: absolute;
+        color: $white;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        width: 25%;
+        text-align: center;
+
+        #turn-summary {
+            background-color: $black;
+        }
+
+    }
 
     &-title-1,
     &-title-2 {
@@ -94,6 +266,10 @@ body {
 
         .gray-font {
             color: $mono-mid;
+        }
+
+        .strawberry-font {
+            color: $strawberry-dark;
         }
     }
 
@@ -129,9 +305,14 @@ body {
 
     #choices {
         position: absolute;
-        top: 95%;
+        top: 85%;
         left: 50%;
         transform: translate(-50%,-50%);
+
+        #rock:hover { color: $plum;}
+        #paper:hover { color: $cherry-dark;}
+        #scissors:hover { color: $midnight;}
+
 
         .choice {
             cursor: pointer;
@@ -139,13 +320,17 @@ body {
             padding: 1.5rem;
             margin: 1rem 0;
             // border-radius: 50%;
-            transform: scale(1);
+            transform: scale(1) translateY(0rem);
             transition: .375s all;
 
             &:hover {
-                background-color: $mono-mid;
-                transform: scale(1.1);
+                background-color: $white;
+                transform: scale(1.1) translateY(0rem);
             }
+
+            // &:active {
+            //     transform: scale(1.1) translateY(-1rem);
+            // }
 
             .fas {
                 font-size: 2.5rem;
@@ -160,22 +345,48 @@ body {
         z-index: 500;
 
         .player-name {
+            padding-top: 3rem;
             text-align: center;
         }
+
+        .win-display {
+            text-align: left;
+            width: 67.5%;
+            padding-left: 5rem;
+            padding-top: 5rem;
+        }
+
     }
 
     #player1 {
-
-        &-name {
-            color: $strawberry-light;
-        }
+        &-name,
+        &-wins {color: $strawberry-light;}
     }
 
     #player2 {
-
-        &-name {
-            color: $midnight-dark;
-        }
+        &-name,
+        &-wins {color: $midnight-shadow;}
     }
 }
 
+  /* label color */
+  .input-label {
+    color: $plum-dark !important;
+  }
+  /* label focus color */
+  .input-field input[type=text]:focus + .input-label,
+  .input-field input[type=password]:focus + .input-label {
+    color: $plum !important;
+  }
+  /* label underline focus color */
+  .input-field input[type=text]:focus,
+  .input-field input[type=password]:focus {
+    border-bottom: 1px solid $strawberry-light !important;
+    box-shadow: 0 1px 0 0 $strawberry-light !important;
+  }
+
+
+.invisible {
+    display: none;
+    opacity: 0;
+}

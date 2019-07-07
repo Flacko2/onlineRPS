@@ -1,64 +1,355 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>RPS ONLINE</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-            
-    <script src="https://kit.fontawesome.com/77faf95db4.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Major+Mono+Display&display=swap" rel="stylesheet">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>RPS ONLINE</title>
+        <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"
+        ></script>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+        />
 
-    <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
+        <script src="https://kit.fontawesome.com/77faf95db4.js"></script>
+        <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css?family=Major+Mono+Display&display=swap"
+            rel="stylesheet"
+        />
 
-    <!-- ROCK + PAPER + SCISSORS ICONS -->
-        <!-- <i class="fas fa-hand-scissors"></i>
-        <i class="fas fa-hand-rock"></i>
-        <i class="fas fa-hand-paper"></i> -->
-    <div class="game-container">
-        <h1 id="main-title">
-            <span class="white-font">Rock </span><span class="gray-white-font">Paper </span><span class="gray-font">Scissors </span>
-        </h1>   
-        <main id="game" class="z-depth-5">
-            <h2 id="game-title-1">
-                <span class="white-font">Rock </span><span class="gray-white-font">Paper </span><span class="gray-font">Scissors </span>
+        <link rel="stylesheet" href="assets/css/style.css" />
+    </head>
+    <body>
+        <!-- Log In / Sign Up / Log Out Menu -->
+
+        <div id="user-menu">
+            <a
+                class="waves-effect waves-light btn modal-trigger btn-modal"
+                href="#login"
+                id="login-btn"
+            >
+                Login</a
+            >
+            <a
+                class="waves-effect waves-light btn modal-trigger btn-modal"
+                href="#sign-up"
+                id="sign-up-btn"
+                >Sign Up</a
+            >
+            <a
+            class="waves-effect waves-light btn btn-modal btn-sign-out"
+            id="sign-out"
+            >Sign Out</a
+            >   
+            <a
+            class="waves-effect waves-light btn btn-modal btn-reset invisible"
+            id="reset-game"
+            >Reset Game</a
+            >
+            <a
+            class="waves-effect waves-light btn btn-modal btn-main-menu invisible"
+            id="back-to-lobby"
+            >Main Menu</a
+            >
+        </div>
+
+        <!-- Modal Structure -->
+
+        <!-- LOGIN MODAL -->
+        <div id="login" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <div class="row">
+                    <div class="col s8 offset-s2">
+                        <h4 class="login-title modal-title">Log in</h4>
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input
+                                        id="email-log-in"
+                                        type="email"
+                                        class="validate"
+                                    />
+                                    <label
+                                        class="input-label"
+                                        for="email-log-in"
+                                        >Email</label
+                                    >
+                                    <span
+                                        class="helper-text"
+                                        data-error="wrong"
+                                        data-success="right"
+                                        >Sign In With This</span
+                                    >
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input
+                                        id="password-check"
+                                        type="password"
+                                        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
+                                        class="validate"
+                                    />
+                                    <label class="input-label" for="password"
+                                        >Password</label
+                                    >
+                                    <span
+                                        class="helper-text"
+                                        data-error="wrong"
+                                        data-success="right"
+                                    ></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a
+                    id="login-submit"
+                    href="#!"
+                    class="modal-close waves-effect waves-green btn-flat btn-submit"
+                    >Log In</a
+                >
+            </div>
+        </div>
+
+        <!-- SIGN-UP MODAL -->
+        <div id="sign-up" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <div class="row">
+                    <div class="col s10 offset-s1">
+                        <h4 class="sign-up-title modal-title">Sign Up</h4>
+                        <form class="col s12 sign-up-form">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input
+                                        id="email-sign-up"
+                                        type="email"
+                                        class="validate"
+
+                                        required
+                                    />
+                                    <label
+                                        class="input-label"
+                                        for="email-sign-up"
+                                        >Enter Email</label
+                                    >
+                                    <span
+                                        class="helper-text"
+                                        data-error="wrong"
+                                        data-success="right"
+                                        >Don't Worry! We will NOT send any emails. This is only used as a unique identifier.</span
+                                    >
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input
+                                        id="password-create"
+                                        type="password"
+                                        class="validate"
+                                        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
+
+                                        required
+                                    />
+                                    <label
+                                        class="input-label"
+                                        for="password-create"
+                                        >Password</label
+                                    >
+                                    <span
+                                        class="helper-text"
+                                        data-error="wrong"
+                                        data-success="right"
+                                        >1 uppercase, 1 lowercase, 1
+                                        number</span
+                                    >
+                                </div>
+                                <div class="input-field col s6">
+                                    <input
+                                        id="password-create-validate"
+                                        type="password"
+                                        class="validate"
+                                        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
+
+                                        required
+                                    />
+                                    <label
+                                        class="input-label"
+                                        for="password-create-validate"
+                                        >Re-enter Password</label
+                                    >
+                                    <span
+                                        class="helper-text"
+                                        data-error="wrong"
+                                        data-success="right"
+                                    ></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a
+                    id="create-account"
+                    href="#!"
+                    class="modal-close waves-effect waves-green btn-flat btn-submit"
+                    >Create an account</a
+                >
+            </div>
+        </div>
+
+        <!-- MAIN PAGES -->
+
+        <!-- INTRO BODY -->
+        <div class="intro-container">
+            <h1 id="main-title">
+                <span class="white-font">Rock </span
+                ><span class="gray-white-font">Paper </span
+                ><span class="gray-font">Scissors </span>
+            </h1>
+            <h2 class="intro-title">
+                make sure to create an account to play online
             </h2>
-            <h2 id="game-title-2">
-                <span class="gray-font">Scissors </span><span class="gray-white-font">Paper </span><span class="white-font">Rock </span>
-            </h2>
-            <section id="left">
-                <div id="player1">
-                    <h3 id="player1-name" class="player-name">Player_1</h3>
+            <a id="play-btn" class="waves-effect waves-teal btn-floating"
+                >Play</a
+            >
+        </div>
+
+        <!-- LOBBY BODY -->
+        <div class="lobby-container invisible">
+            <h1 id="main-title">
+                <span class="white-font">Rock </span
+                ><span class="gray-white-font">Paper </span
+                ><span class="gray-font">Scissors </span>
+            </h1>
+            <main id="lobby">
+                <div class="row">
+                    <div class="col s12">
+                        <ul class="tabs tabs-fixed-width">
+                            <li class="tab col s3">
+                                <a href="#play-offline">play offline</a>
+                            </li>
+                            <li class="tab col s3">
+                                <a class="" href="#play-online">play online</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="play-offline" class="col s12">
+                        <h3 class="offline-title">
+                            Click below to play against the computer!
+                        </h3>
+                        <a
+                            id="offline-btn"
+                            class="waves-effect waves-teal btn-floating"
+                            >Play</a
+                        >
+                    </div>
+                    <div id="play-online" class="col s12">
+                        <ul class="collection with-header player-list">
+                            <li class="collection-header">
+                                <h4>Players Online</h4>
+                            </li>
+
+                        </ul>
+                    </div>
                 </div>
-            </section>  
-            <section id="choices">
-                <div id="rock" class="choice z-depth-3 waves-effect">
-                    <i class="fas fa-hand-rock"></i>
+            </main>
+        </div>
+
+        <!-- GAME BODY -->
+        <div class="game-container invisible">
+            <h1 id="main-title">
+                <span class="white-font">Rock </span
+                ><span class="gray-white-font">Paper </span
+                ><span class="gray-font">Scissors </span>
+            </h1>
+            <main id="game" class="z-depth-5">
+                <div id="center-text">
+                    <p id="turn-summary"><span class="who-won"></span></p>
                 </div>
-                <div id="paper" class="choice z-depth-3 waves-effect">
-                    <i class="fas fa-hand-paper"></i>
-                </div>
-                <div id="scissors" class="choice z-depth-3 waves-effect">
-                    <i class="fas fa-hand-scissors"></i>
-                </div>
-            </section>  
-            <section id="right">
-                <div id="player2">
-                    <h3 id="player2-name" class="player-name">Player_2</h3>
-                </div>
-            </section>    
-        </main>
-    </div>
+                <h2 id="game-title-1">
+                    <span class="white-font">Rock </span
+                    ><span class="gray-white-font">Paper </span
+                    ><span class="gray-font">Scissors </span>
+                </h2>
+                <h2 id="game-title-2">
+                    <span class="strawberry-font">Scissors </span
+                    ><span class="gray-white-font">Paper </span
+                    ><span class="white-font">Rock </span>
+                </h2>
+                <section id="left">
+                    <div id="player1">
+                        <h3 id="player1-name" class="player-name">Player_1</h3>
+                        <h4 id="player1-wins" class="win-display">
+                            Wins: <span class="p1-win-count"></span>
+                        </h4>
+                    </div>
+                </section>
+                <section id="choices">
+                    <div id="rock" class="choice z-depth-3 waves-effect">
+                        <i class="fas fa-hand-rock"></i>
+                    </div>
+                    <div id="paper" class="choice z-depth-3 waves-effect">
+                        <i class="fas fa-hand-paper"></i>
+                    </div>
+                    <div id="scissors" class="choice z-depth-3 waves-effect">
+                        <i class="fas fa-hand-scissors"></i>
+                    </div>
+                </section>
+                <section id="right">
+                    <div id="player2">
+                        <h3 id="player2-name" class="player-name">Player_2</h3>
+                        <h4 id="player2-wins" class="win-display">
+                            Wins: <span class="p2-win-count"></span>
+                        </h4>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-firestore.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+        <script>
+            // Your web app's Firebase configuration
+            let firebaseConfig = {
+                apiKey: "AIzaSyAeTT4dTBeyvTeqf8jTjy1MsmrZAYvmMZk",
+                authDomain: "rps-online-b0cb1.firebaseapp.com",
+                databaseURL: "https://rps-online-b0cb1.firebaseio.com",
+                projectId: "rps-online-b0cb1",
+                storageBucket: "",
+                messagingSenderId: "308702807979",
+                appId: "1:308702807979:web:c594cc326887b294"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
 
 
+            //make auth / firestore references
+            const auth = firebase.auth();
+            const db = firebase.firestore();
 
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="assets/js/main.js"></script>
-</body>
+            //update firestore settings 
+            db.settings({ timestampsInSnapshots: true})
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <!-- <script src="assets/js/auth.js"></script> -->
+        <script src="assets/js/main.js"></script>
+    </body>
 </html>
