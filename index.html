@@ -45,19 +45,19 @@
                 >Sign Up</a
             >
             <a
-            class="waves-effect waves-light btn btn-modal btn-sign-out"
-            id="sign-out"
-            >Sign Out</a
-            >   
-            <a
-            class="waves-effect waves-light btn btn-modal btn-reset invisible"
-            id="reset-game"
-            >Reset Game</a
+                class="waves-effect waves-light btn btn-modal btn-sign-out"
+                id="sign-out"
+                >Sign Out</a
             >
             <a
-            class="waves-effect waves-light btn btn-modal btn-main-menu invisible"
-            id="back-to-lobby"
-            >Main Menu</a
+                class="waves-effect waves-light btn btn-modal btn-reset invisible"
+                id="reset-game"
+                >Reset Game</a
+            >
+            <a
+                class="waves-effect waves-light btn btn-modal btn-main-menu invisible"
+                id="back-to-lobby"
+                >Main Menu</a
             >
         </div>
 
@@ -135,7 +135,6 @@
                                         id="email-sign-up"
                                         type="email"
                                         class="validate"
-
                                         required
                                     />
                                     <label
@@ -147,7 +146,9 @@
                                         class="helper-text"
                                         data-error="wrong"
                                         data-success="right"
-                                        >Don't Worry! We will NOT send any emails. This is only used as a unique identifier.</span
+                                        >Don't Worry! We will NOT send any
+                                        emails. This is only used as a unique
+                                        identifier.</span
                                     >
                                 </div>
                             </div>
@@ -158,7 +159,6 @@
                                         type="password"
                                         class="validate"
                                         pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
-
                                         required
                                     />
                                     <label
@@ -180,7 +180,6 @@
                                         type="password"
                                         class="validate"
                                         pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
-
                                         required
                                     />
                                     <label
@@ -260,7 +259,6 @@
                             <li class="collection-header">
                                 <h4>Players Online</h4>
                             </li>
-
                         </ul>
                     </div>
                 </div>
@@ -321,32 +319,51 @@
         <!-- The core Firebase JS SDK is always required and must be listed first -->
         <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-auth.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-database.js"></script>
+
+        <!-- <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-firestore.js"></script> -->
 
         <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#config-web-app -->
 
         <script>
             // Your web app's Firebase configuration
-            let firebaseConfig = {
+            // let firebaseConfig = {
+            //     apiKey: "AIzaSyAeTT4dTBeyvTeqf8jTjy1MsmrZAYvmMZk",
+            //     authDomain: "rps-online-b0cb1.firebaseapp.com",
+            //     databaseURL: "https://rps-online-b0cb1.firebaseio.com",
+            //     projectId: "rps-online-b0cb1",
+            //     storageBucket: "",
+            //     messagingSenderId: "308702807979",
+            //     appId: "1:308702807979:web:c594cc326887b294"
+            // };
+
+            const firebaseConfig = {
                 apiKey: "AIzaSyAeTT4dTBeyvTeqf8jTjy1MsmrZAYvmMZk",
                 authDomain: "rps-online-b0cb1.firebaseapp.com",
                 databaseURL: "https://rps-online-b0cb1.firebaseio.com",
                 projectId: "rps-online-b0cb1",
-                storageBucket: "",
+                storageBucket: "rps-online-b0cb1.appspot.com",
                 messagingSenderId: "308702807979",
                 appId: "1:308702807979:web:c594cc326887b294"
             };
             // Initialize Firebase
             firebase.initializeApp(firebaseConfig);
 
+            // Initialize Firebase
+            // firebase.initializeApp(firebaseConfig);
 
             //make auth / firestore references
             const auth = firebase.auth();
-            const db = firebase.firestore();
+            const db = firebase.database();
+            // const fdb = firebase.firestore();
+            const connectionsRef = db.ref("/connections");
+            const connectedRef = db.ref(".info/connected");
+            const usersRef = db.ref("users/");
+            //update firestore settings
+            // fdb.settings({ timestampsInSnapshots: true})
 
-            //update firestore settings 
-            db.settings({ timestampsInSnapshots: true})
+
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <!-- <script src="assets/js/auth.js"></script> -->
