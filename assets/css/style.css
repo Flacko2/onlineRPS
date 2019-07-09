@@ -369,4 +369,8 @@ body #sign-up .modal-footer .btn-submit:hover {
   display: none;
   opacity: 0;
 }
+
+.collection-item {
+  cursor: pointer;
+}
 /*# sourceMappingURL=style.css.map */

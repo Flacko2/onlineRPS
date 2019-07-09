@@ -66,24 +66,6 @@ function removeByValue(array, value) {
     });
 }
 
-function createPlayer(player) {
-    let icon = $("<i>")
-        .addClass("material-icons")
-        .text("send");
-    let link = $("<a>")
-        .addClass("secondary-content")
-        .attr("href", "#")
-        .append(icon);
-    let div = $("<div>")
-        .text(player)
-        .append(link);
-    let list = $("<li>")
-        .addClass("collection-item")
-        .attr("data-name", player)
-        .append(div);
-    $(".player-list").append(list);
-}
-
 $(document).ready(function() {
     $(".modal").modal();
     $(".tabs").tabs();
@@ -153,7 +135,20 @@ $(document).ready(function() {
 
         checkWinner(player1choice, player2choice);
     });
+
+
 });
+
+let playerClicked;
+$(document).on('click', 'li.collection-item', function (e) {
+    e.preventDefault();
+    playerClicked = $(this).data('name');
+    console.log(playerClicked);
+});
+
+
+
+    
 
 // ==============================================================
 
@@ -195,6 +190,26 @@ function gotData(data) {
 
 }
 
+
+function createPlayer(player) {
+    let icon = $("<i>")
+        .addClass("material-icons")
+        .text("send");
+    let link = $("<a>")
+        .addClass("secondary-content")
+        .attr("href", "#")
+        .append(icon);
+    let div = $("<div>")
+        .text(player)
+        .append(link)
+        .addClass("collection-item-container")
+    let list = $("<li>")
+        .addClass("collection-item")
+        .attr("data-name", player)
+        .append(div);
+    $(".player-list").append(list);
+}
+
 function removePlayer(user) {
     $(`.collection-item[data-name='${user}']`).remove();
 }
@@ -214,7 +229,7 @@ connectedRef.on('value', function(connectedSnap) {
             isOnline: true,
             dateAdded: firebase.database.ServerValue.TIMESTAMP
 
-        })
+        });
         db.ref(`users/${auth.currentUser.uid}`).onDisconnect().set({
             userID: auth.currentUser.uid,
             user: auth.currentUser.email,
